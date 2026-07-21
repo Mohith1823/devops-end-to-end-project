@@ -13,7 +13,7 @@
 - Prometheus
 - Grafana
 
-## Project Architecture
+## Project Architecture From Start
 
 Developer
 ↓
