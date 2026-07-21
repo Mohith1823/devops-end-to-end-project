@@ -43,5 +43,28 @@ pipeline {
                 }
             }
         }
+stage('Remove Old Container') {
+    steps {
+        sh '''
+        docker stop flask-devops-app || true
+        docker rm flask-devops-app || true
+        '''
     }
+}
+stage('Deploy Container') {
+    steps {
+        sh '''
+        docker run -d \
+        --name flask-devops-app \
+        -p 5000:5000 \
+        dockermohith/flask-devops-app:${BUILD_NUMBER}
+        '''
+    }
+}
+stage('Verify Deployment') {
+    steps {
+        sh 'docker ps'
+    }
+} 
+   }
 }
